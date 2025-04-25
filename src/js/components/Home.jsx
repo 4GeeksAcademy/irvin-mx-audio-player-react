@@ -3,7 +3,7 @@ import React, { useEffect, useState, useRef } from "react";
 // Create your first component
 const Home = () => {
     const [tracksFromApiArray, setTracksFromApiArray] = useState([]);
-    const [currentSongIndex, setCurrentSongIndex] = useState(null); // Track the index of the currently playing song
+    const [currentSongIndex, setCurrentSongIndex] = useState(null); 
     const [isSongPlaying, setIsSongPlaying] = useState(false);
 
     const audioTagSrc = useRef(null);
@@ -21,7 +21,7 @@ const Home = () => {
         }
     };
 
-    // Fetch songs before the component loads
+    
     useEffect(() => {
         getAllSongs();
     }, []);
@@ -53,17 +53,14 @@ const Home = () => {
 
     const handlePreviousSong = () => {
         let newIndex = currentSongIndex;
-
         if (newIndex === null || newIndex <= 0) {
-            // If already at the first song or undefined, play the first song
+        
             newIndex = 0;
         } else {
-            // Move to the previous song
             newIndex -= 1;
         }
 
-        setCurrentSongIndex(newIndex); // Update the current song index
-
+        setCurrentSongIndex(newIndex); 
         if (audioTagSrc.current) {
             audioTagSrc.current.src = `https://playground.4geeks.com${tracksFromApiArray[newIndex].url}`;
             audioTagSrc.current.play();
@@ -73,14 +70,12 @@ const Home = () => {
 
     const handleNextSong = () => {
         let newIndex = currentSongIndex;
-
         if (newIndex === null || newIndex >= tracksFromApiArray.length - 1) {
 
             newIndex = 0;
         } else {
             newIndex += 1;
         }
-
         setCurrentSongIndex(newIndex); 
 
         if (audioTagSrc.current) {
@@ -110,6 +105,8 @@ const Home = () => {
                     <p>0 tracks available</p>
                 )}
             </ul>
+
+
 
             <div className="position-fixed bottom-0 bg-secondary w-100 d-flex justify-content-center">
                 <audio ref={audioTagSrc}></audio>
